@@ -54,6 +54,29 @@ public class HomeViewModel(IPostHog posthog)
 `GetFeatureFlag`, `GetFeatureFlagPayload`, `ReloadFeatureFlags`, `Register`/`Unregister`,
 `DistinctId`, `Reset`, `Flush`, `OptIn`/`OptOut`, `StartSessionReplay`/`StopSessionReplay`.
 
+## Overriding behavior
+
+`PostHogService` is `public` on each platform and every member is `virtual`. Subclass it
+(under `Platforms/iOS` or `Platforms/Android`), override what you need, call `base` to keep the
+native behavior, and register your type:
+
+```csharp
+public class MyPostHog : PostHogService
+{
+    public MyPostHog(PostHogOptions options) : base(options) { }
+
+    public override void Capture(string eventName, IDictionary<string, object>? properties = null)
+    {
+        properties ??= new Dictionary<string, object>();
+        properties["app_build"] = AppInfo.BuildString;
+        base.Capture(eventName, properties);   // Client is available via the protected property
+    }
+}
+
+// register the subclass:
+builder.AddPostHog<MyPostHog>(o => o.ApiKey = "phc_your_project_key");
+```
+
 ## Rebuilding the iOS xcframework
 
 `PostHog.xcframework` under `src/Maui.Posthog.iOS/` is prebuilt from `posthog-ios` 3.64.6.

@@ -5,12 +5,16 @@ using JObject = Java.Lang.Object;
 
 namespace Maui.Posthog;
 
-internal sealed class PostHogService : IPostHog
+/// <summary>Android implementation of <see cref="IPostHog"/>. All members are virtual; subclass to override behavior.</summary>
+public class PostHogService : IPostHog
 {
-    private readonly IPostHogInterface _client;
+    /// <summary>The underlying native PostHog client, exposed for subclasses.</summary>
+    protected IPostHogInterface Client { get; }
 
     public PostHogService(PostHogOptions options)
     {
+        ArgumentNullException.ThrowIfNull(options);
+
         var config = new PostHogAndroidConfig(
             options.ApiKey,
             options.Host,
@@ -32,48 +36,48 @@ internal sealed class PostHogService : IPostHog
         }
 
         // with() runs the full setup pipeline (integrations, replay) and returns the instance.
-        _client = PostHogAndroid.Shared.With(global::Android.App.Application.Context!, config);
+        Client = PostHogAndroid.Shared.With(global::Android.App.Application.Context!, config);
     }
 
-    public string DistinctId => _client.DistinctId();
+    public virtual string DistinctId => Client.DistinctId();
 
-    public void Capture(string eventName, IDictionary<string, object>? properties = null)
-        => _client.Capture(eventName, null, ToJava(properties), null, null, null);
+    public virtual void Capture(string eventName, IDictionary<string, object>? properties = null)
+        => Client.Capture(eventName, null, ToJava(properties), null, null, null);
 
-    public void Identify(string distinctId, IDictionary<string, object>? userProperties = null, IDictionary<string, object>? userPropertiesSetOnce = null)
-        => _client.Identify(distinctId, ToJava(userProperties), ToJava(userPropertiesSetOnce));
+    public virtual void Identify(string distinctId, IDictionary<string, object>? userProperties = null, IDictionary<string, object>? userPropertiesSetOnce = null)
+        => Client.Identify(distinctId, ToJava(userProperties), ToJava(userPropertiesSetOnce));
 
-    public void Screen(string screenName, IDictionary<string, object>? properties = null)
-        => _client.Screen(screenName, ToJava(properties));
+    public virtual void Screen(string screenName, IDictionary<string, object>? properties = null)
+        => Client.Screen(screenName, ToJava(properties));
 
-    public void Alias(string alias) => _client.Alias(alias);
+    public virtual void Alias(string alias) => Client.Alias(alias);
 
-    public void Group(string type, string key, IDictionary<string, object>? properties = null)
-        => _client.Group(type, key, ToJava(properties));
+    public virtual void Group(string type, string key, IDictionary<string, object>? properties = null)
+        => Client.Group(type, key, ToJava(properties));
 
-    public bool IsFeatureEnabled(string key) => _client.IsFeatureEnabled(key, false);
+    public virtual bool IsFeatureEnabled(string key) => Client.IsFeatureEnabled(key, false);
 
-    public object? GetFeatureFlag(string key) => Unwrap(_client.GetFeatureFlag(key, null));
+    public virtual object? GetFeatureFlag(string key) => Unwrap(Client.GetFeatureFlag(key, null));
 
-    public object? GetFeatureFlagPayload(string key) => Unwrap(_client.GetFeatureFlagPayload(key, null));
+    public virtual object? GetFeatureFlagPayload(string key) => Unwrap(Client.GetFeatureFlagPayload(key, null));
 
-    public void ReloadFeatureFlags() => _client.ReloadFeatureFlags(null);
+    public virtual void ReloadFeatureFlags() => Client.ReloadFeatureFlags(null);
 
-    public void Register(string key, object value) => _client.Register(key, ToJava(value));
+    public virtual void Register(string key, object value) => Client.Register(key, ToJava(value));
 
-    public void Unregister(string key) => _client.Unregister(key);
+    public virtual void Unregister(string key) => Client.Unregister(key);
 
-    public void Reset() => _client.Reset();
+    public virtual void Reset() => Client.Reset();
 
-    public void Flush() => _client.Flush();
+    public virtual void Flush() => Client.Flush();
 
-    public void OptIn() => _client.OptIn();
+    public virtual void OptIn() => Client.OptIn();
 
-    public void OptOut() => _client.OptOut();
+    public virtual void OptOut() => Client.OptOut();
 
-    public void StartSessionReplay() => _client.StartSessionReplay(true);
+    public virtual void StartSessionReplay() => Client.StartSessionReplay(true);
 
-    public void StopSessionReplay() => _client.StopSessionReplay();
+    public virtual void StopSessionReplay() => Client.StopSessionReplay();
 
     private static IDictionary<string, JObject>? ToJava(IDictionary<string, object>? source)
     {
