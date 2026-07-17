@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>24</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsTrimmable>true</IsTrimmable>
+    <!-- Swift n/a here; keep the generated C# binding API stable -->
+    <NoWarn>$(NoWarn);BG8605;BG8700;CS0114;CS0108;CS0618</NoWarn>
+
+    <PackageId>Omnicasa.Maui.PostHog.Android</PackageId>
+    <Title>Omnicasa.Maui.PostHog.Android</Title>
+    <Description>Android native binding of the PostHog SDK (posthog-android) for .NET MAUI. Implementation package for Maui.Posthog.</Description>
+  </PropertyGroup>
+
+  <!-- Native SDKs pulled from Maven Central and bound to C# -->
+  <ItemGroup>
+    <AndroidMavenLibrary Include="com.posthog:posthog" Version="3.19.0" />
+    <AndroidMavenLibrary Include="com.posthog:posthog-android" Version="3.19.0" />
+    <AndroidMavenLibrary Include="com.squareup.curtains:curtains" Version="1.2.5" />
+  </ItemGroup>
+
+  <!-- Transitive deps satisfied by existing .NET for Android bindings -->
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="2.2.20" />
+    <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.2.20" />
+    <PackageReference Include="GoogleGson" Version="2.13.2" />
+    <PackageReference Include="Square.OkHttp3" Version="4.12.0.6" />
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.16.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" Version="2.9.4" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Common.Java8" Version="2.9.4" />
+  </ItemGroup>
+</Project>

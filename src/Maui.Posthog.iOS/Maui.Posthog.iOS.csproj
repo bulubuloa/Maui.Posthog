@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+    <IsTrimmable>true</IsTrimmable>
+    <!-- Link the framework directly (modern default) instead of embedding it as a resource. -->
+    <NoBindingEmbedding>true</NoBindingEmbedding>
+
+    <PackageId>Omnicasa.Maui.PostHog.iOS</PackageId>
+    <Title>Omnicasa.Maui.PostHog.iOS</Title>
+    <Description>iOS native binding of the PostHog SDK (PostHog.xcframework) for .NET MAUI. Implementation package for Maui.Posthog.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+
+  <!-- Swift framework built from posthog-ios 3.64.6 (BUILD_LIBRARY_FOR_DISTRIBUTION=YES) -->
+  <ItemGroup>
+    <NativeReference Include="PostHog.xcframework">
+      <Kind>Framework</Kind>
+      <Frameworks>UIKit Foundation CoreGraphics SystemConfiguration</Frameworks>
+      <!-- Classes are referenced only via the static registrar, so force the link. -->
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+  </ItemGroup>
+</Project>

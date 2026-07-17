@@ -1,0 +1,659 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.5 clang-2100.0.123.102)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name PostHog
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+import Accelerate
+import CoreGraphics
+import Darwin
+import Foundation
+import MachO
+import PhotosUI
+@_exported import PostHog
+import Swift
+import SwiftUI
+import SystemConfiguration
+import UIKit
+import WebKit
+import _Concurrency
+import _PhotosUI_SwiftUI
+import _StringProcessing
+import _SwiftConcurrencyShims
+import _WebKit_SwiftUI
+import zlib
+@_hasMissingDesignatedInitializers @objc @objcMembers public class PostHogSurveyResponse : ObjectiveC.NSObject {
+  @objc final public let type: PostHog.PostHogSurveyResponseType
+  final public let linkClicked: Swift.Bool?
+  final public let ratingValue: Swift.Int?
+  @objc final public let textValue: Swift.String?
+  @objc final public let selectedOptions: [Swift.String]?
+  @objc public static func link(_ clicked: Swift.Bool) -> PostHog.PostHogSurveyResponse
+  public static func rating(_ rating: Swift.Int?) -> PostHog.PostHogSurveyResponse
+  @objc public static func openEnded(_ openEnded: Swift.String?) -> PostHog.PostHogSurveyResponse
+  @objc public static func singleChoice(_ singleChoice: Swift.String?) -> PostHog.PostHogSurveyResponse
+  @objc public static func multipleChoice(_ multipleChoice: [Swift.String]?) -> PostHog.PostHogSurveyResponse
+  @objc deinit
+}
+@objc public enum PostHogSurveyResponseType : Swift.Int {
+  case link
+  case rating
+  case openEnded
+  case singleChoice
+  case multipleChoice
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum Gzip {
+  public static let maxWindowBits: Swift.Int32
+}
+public struct CompressionLevel : Swift.RawRepresentable, Swift.Sendable {
+  public let rawValue: Swift.Int32
+  public static let noCompression: PostHog.CompressionLevel
+  public static let bestSpeed: PostHog.CompressionLevel
+  public static let bestCompression: PostHog.CompressionLevel
+  public static let defaultCompression: PostHog.CompressionLevel
+  public init(rawValue: Swift.Int32)
+  public init(_ rawValue: Swift.Int32)
+  public typealias RawValue = Swift.Int32
+}
+public struct GzipError : Swift.Error, Swift.Sendable {
+  public enum Kind : Swift.Equatable, Swift.Sendable {
+    case stream
+    case data
+    case memory
+    case buffer
+    case version
+    case unknown(code: Swift.Int)
+    public static func == (a: PostHog.GzipError.Kind, b: PostHog.GzipError.Kind) -> Swift.Bool
+  }
+  public let kind: PostHog.GzipError.Kind
+  public let message: Swift.String
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+extension Foundation.URLSession {
+  public func postHogData(for request: Foundation.URLRequest, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  public func postHogData(from url: Foundation.URL, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  public func postHogUpload(for request: Foundation.URLRequest, fromFile fileURL: Foundation.URL, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  public func postHogUpload(for request: Foundation.URLRequest, from bodyData: Foundation.Data, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  @available(iOS 15.0, *)
+  public func postHogData(for request: Foundation.URLRequest, delegate: (any Foundation.URLSessionTaskDelegate)? = nil, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  @available(iOS 15.0, *)
+  public func postHogData(from url: Foundation.URL, delegate: (any Foundation.URLSessionTaskDelegate)? = nil, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  @available(iOS 15.0, *)
+  public func postHogUpload(for request: Foundation.URLRequest, fromFile fileURL: Foundation.URL, delegate: (any Foundation.URLSessionTaskDelegate)? = nil, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  @available(iOS 15.0, *)
+  public func postHogUpload(for request: Foundation.URLRequest, from bodyData: Foundation.Data, delegate: (any Foundation.URLSessionTaskDelegate)? = nil, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.Data, Foundation.URLResponse)
+  @available(iOS 15.0, *)
+  public func postHogDownload(for request: Foundation.URLRequest, delegate: (any Foundation.URLSessionTaskDelegate)? = nil, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.URL, Foundation.URLResponse)
+  @available(iOS 15.0, *)
+  public func postHogDownload(from url: Foundation.URL, delegate: (any Foundation.URLSessionTaskDelegate)? = nil, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.URL, Foundation.URLResponse)
+  @available(iOS 15.0, *)
+  public func postHogDownload(resumeFrom resumeData: Foundation.Data, delegate: (any Foundation.URLSessionTaskDelegate)? = nil, postHog: PostHog.PostHogSDK? = nil) async throws -> (Foundation.URL, Foundation.URLResponse)
+}
+extension UIKit.UIColor {
+  convenience public init(hex: Swift.String?)
+  public func hexDescription(_ includeAlpha: Swift.Bool = false) -> Swift.String
+}
+public func deleteSafely(_ file: Foundation.URL)
+extension PostHog.PostHogSDK {
+  @objc public static let didStartNotification: Foundation.Notification.Name
+  @objc public static let didReceiveFeatureFlags: Foundation.Notification.Name
+}
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func postHogDeepLinkListener(_ posthog: PostHog.PostHogSDK? = nil) -> some SwiftUICore.View
+  
+}
+@_hasMissingDesignatedInitializers public class PostHogStorageManager {
+  public func getAnonymousId() -> Swift.String
+  public func setAnonymousId(_ id: Swift.String)
+  public func getDeviceId() -> Swift.String
+  public func getDistinctId() -> Swift.String
+  public func setDistinctId(_ id: Swift.String)
+  public func isIdentified() -> Swift.Bool
+  public func setIdentified(_ isIdentified: Swift.Bool)
+  public func isPersonProcessing() -> Swift.Bool
+  public func setPersonProcessing(_ enable: Swift.Bool)
+  public func reset(keepAnonymousId: Swift.Bool = false, _ resetStorage: Swift.Bool = false)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class PostHogErrorTrackingConfig : ObjectiveC.NSObject {
+  @available(watchOS, unavailable, message: "Crash autocapture is not available on watchOS")
+  @available(visionOS, unavailable, message: "Crash autocapture is not available on visionOS")
+  @objc public var autoCapture: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var inAppIncludes: [Swift.String]
+  @objc public var inAppExcludes: [Swift.String]
+  @objc public var inAppByDefault: Swift.Bool
+  @objc public var exceptionSteps: PostHog.PostHogExceptionStepsConfig
+  @objc public var ignoredExceptionTypes: [Swift.String]
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class PostHogExceptionStepsConfig : ObjectiveC.NSObject {
+  @objc public var enabled: Swift.Bool
+  @objc public var maxBytes: Swift.Int
+  @objc override dynamic public init()
+  @objc deinit
+}
+
+public var postHogVersion: Swift.String
+public let postHogiOSSdkName: Swift.String
+public var postHogSdkName: Swift.String
+@_inheritsConvenienceInitializers @objc(PostHogRageClickConfig) public class PostHogRageClickConfig : ObjectiveC.NSObject {
+  @objc public var enabled: Swift.Bool
+  @objc public var thresholdPoints: CoreFoundation.CGFloat
+  @objc public var timeoutInterval: Swift.Double
+  @objc public var minimumTapCount: Swift.Int
+  @objc override dynamic public init()
+  @objc deinit
+}
+public func toISO8601String(_ date: Foundation.Date) -> Swift.String
+public func toISO8601Date(_ date: Swift.String) -> Foundation.Date?
+@objc final public class BoxedBeforeSendBlock : ObjectiveC.NSObject {
+  @objc final public let block: PostHog.BeforeSendBlock
+  @objc(block:) public init(block: @escaping PostHog.BeforeSendBlock)
+  @objc deinit
+}
+@objc final public class BoxedBeforeSendLogBlock : ObjectiveC.NSObject {
+  @objc final public let block: PostHog.PostHogBeforeSendLogBlock
+  @objc(block:) public init(block: @escaping PostHog.PostHogBeforeSendLogBlock)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class PostHogSessionManager : ObjectiveC.NSObject {
+  @objc public static var shared: PostHog.PostHogSessionManager {
+    @objc get
+  }
+  @objc public func setSessionId(_ sessionId: Swift.String)
+  @objc deinit
+}
+public func dateToMillis(_ date: Foundation.Date) -> Swift.Int64
+
+@objc public class PostHogLogEntry : ObjectiveC.NSObject {
+  @objc final public let level: PostHog.PostHogLogLevel
+  @objc final public let message: Swift.String
+  @objc public init(level: PostHog.PostHogLogLevel, message: Swift.String)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class PostHogDisplaySurveyAppearance : ObjectiveC.NSObject {
+  final public let fontFamily: Swift.String?
+  final public let backgroundColor: Swift.String?
+  final public let borderColor: Swift.String?
+  final public let submitButtonColor: Swift.String?
+  final public let submitButtonText: Swift.String?
+  final public let submitButtonTextColor: Swift.String?
+  final public let textColor: Swift.String?
+  final public let descriptionTextColor: Swift.String?
+  final public let ratingButtonColor: Swift.String?
+  final public let ratingButtonActiveColor: Swift.String?
+  final public let inputBackground: Swift.String?
+  final public let inputTextColor: Swift.String?
+  final public let placeholder: Swift.String?
+  final public let surveyPopupDelaySeconds: Foundation.TimeInterval?
+  final public let displayThankYouMessage: Swift.Bool
+  final public let thankYouMessageHeader: Swift.String?
+  final public let thankYouMessageDescription: Swift.String?
+  final public let thankYouMessageDescriptionContentType: PostHog.PostHogDisplaySurveyTextContentType?
+  final public let thankYouMessageCloseButtonText: Swift.String?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class PostHogSessionReplayConsoleLogConfig : ObjectiveC.NSObject {
+  @objc public var logSanitizer: (Swift.String) -> PostHog.PostHogLogEntry?
+  @objc public var minLogLevel: PostHog.PostHogLogLevel
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class PostHogSurveysConfig : ObjectiveC.NSObject {
+  public var surveysDelegate: any PostHog.PostHogSurveysDelegate
+  @objc public var overrideDisplayLanguage: Swift.String?
+  @objc override dynamic public init()
+  @objc deinit
+}
+public typealias OnPostHogSurveyShown = (_ survey: PostHog.PostHogDisplaySurvey) -> Swift.Void
+public typealias OnPostHogSurveyResponse = (_ survey: PostHog.PostHogDisplaySurvey, _ index: Swift.Int, _ response: PostHog.PostHogSurveyResponse) -> PostHog.PostHogNextSurveyQuestion?
+public typealias OnPostHogSurveyClosed = (_ survey: PostHog.PostHogDisplaySurvey) -> Swift.Void
+@objc public protocol PostHogSurveysDelegate {
+  @objc func renderSurvey(_ survey: PostHog.PostHogDisplaySurvey, onSurveyShown: @escaping PostHog.OnPostHogSurveyShown, onSurveyResponse: @escaping PostHog.OnPostHogSurveyResponse, onSurveyClosed: @escaping PostHog.OnPostHogSurveyClosed)
+  @objc func cleanupSurveys()
+}
+@_hasMissingDesignatedInitializers @objc public class PostHogDisplaySurvey : ObjectiveC.NSObject, Swift.Identifiable {
+  final public let id: Swift.String
+  final public let name: Swift.String
+  final public let questions: [PostHog.PostHogDisplaySurveyQuestion]
+  final public let appearance: PostHog.PostHogDisplaySurveyAppearance?
+  final public let startDate: Foundation.Date?
+  final public let endDate: Foundation.Date?
+  public typealias ID = Swift.String
+  @objc deinit
+}
+@objc public enum PostHogDisplaySurveyRatingType : Swift.Int {
+  case number
+  case emoji
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum PostHogDisplaySurveyTextContentType : Swift.Int {
+  case html
+  case text
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func postHogScreenView(_ screenName: Swift.String? = nil, _ properties: [Swift.String : Any]? = nil, postHog: PostHog.PostHogSDK? = nil) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func postHogViewSeen(_ event: Swift.String, _ properties: [Swift.String : Any]? = nil, postHog: PostHog.PostHogSDK? = nil) -> some SwiftUICore.View
+  
+}
+@objc public enum PostHogLogLevel : Swift.Int {
+  case info
+  case warn
+  case error
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(PostHogPropertiesSanitizer) public protocol PostHogPropertiesSanitizer {
+  @objc func sanitize(_ properties: [Swift.String : Any]) -> [Swift.String : Any]
+}
+@_hasMissingDesignatedInitializers @objc public class PostHogNextSurveyQuestion : ObjectiveC.NSObject {
+  final public let questionIndex: Swift.Int
+  final public let isSurveyCompleted: Swift.Bool
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class PostHogSDK : ObjectiveC.NSObject {
+  @objc public var logger: PostHog.PostHogLogger? {
+    get
+  }
+  @objc nonisolated(unsafe) public static let shared: PostHog.PostHogSDK
+  @objc deinit
+  @objc public func debug(_ enabled: Swift.Bool = true)
+  @objc public func setup(_ config: PostHog.PostHogConfig)
+  @objc public func getDistinctId() -> Swift.String
+  @objc public func getAnonymousId() -> Swift.String
+  @objc public func getDeviceId() -> Swift.String
+  @objc public func getSessionId() -> Swift.String?
+  @objc public func startSession()
+  @objc public func endSession()
+  @objc public func captureDeepLink(url: Foundation.URL)
+  @objc public func captureDeepLink(urls: [Foundation.URL])
+  @objc public func captureDeepLink(userActivity: Foundation.NSUserActivity)
+  @objc public func captureDeepLink(url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any])
+  @available(iOS 13.0, tvOS 13.0, *)
+  @objc public func captureDeepLink(openURLContexts: Swift.Set<UIKit.UIOpenURLContext>)
+  @objc public func flush()
+  @objc public func reset()
+  @objc(registerProperties:) public func register(_ properties: [Swift.String : Any])
+  @objc(unregisterProperties:) public func unregister(_ key: Swift.String)
+  @objc public func identify(_ distinctId: Swift.String)
+  @objc(identifyWithDistinctId:userProperties:) public func identify(_ distinctId: Swift.String, userProperties: [Swift.String : Any]? = nil)
+  @objc(identifyWithDistinctId:userProperties:userPropertiesSetOnce:) public func identify(_ distinctId: Swift.String, userProperties: [Swift.String : Any]? = nil, userPropertiesSetOnce: [Swift.String : Any]? = nil)
+  @objc(setPersonPropertiesWithUserPropertiesToSet:) public func setPersonProperties(userPropertiesToSet: [Swift.String : Any]?)
+  @objc(setPersonPropertiesWithUserPropertiesToSet:userPropertiesToSetOnce:) public func setPersonProperties(userPropertiesToSet: [Swift.String : Any]?, userPropertiesToSetOnce: [Swift.String : Any]?)
+  @objc public func capture(_ event: Swift.String)
+  @objc(captureWithEvent:properties:) public func capture(_ event: Swift.String, properties: [Swift.String : Any]? = nil)
+  @objc(captureWithEvent:properties:userProperties:) public func capture(_ event: Swift.String, properties: [Swift.String : Any]? = nil, userProperties: [Swift.String : Any]? = nil)
+  @objc(captureWithEvent:properties:userProperties:userPropertiesSetOnce:) public func capture(_ event: Swift.String, properties: [Swift.String : Any]? = nil, userProperties: [Swift.String : Any]? = nil, userPropertiesSetOnce: [Swift.String : Any]? = nil)
+  @objc(captureWithEvent:properties:userProperties:userPropertiesSetOnce:groups:) public func capture(_ event: Swift.String, properties: [Swift.String : Any]? = nil, userProperties: [Swift.String : Any]? = nil, userPropertiesSetOnce: [Swift.String : Any]? = nil, groups: [Swift.String : Swift.String]? = nil)
+  @objc(captureWithEvent:distinctId:properties:userProperties:userPropertiesSetOnce:groups:) public func capture(_ event: Swift.String, distinctId: Swift.String? = nil, properties: [Swift.String : Any]? = nil, userProperties: [Swift.String : Any]? = nil, userPropertiesSetOnce: [Swift.String : Any]? = nil, groups: [Swift.String : Swift.String]? = nil)
+  @objc(captureWithEvent:distinctId:properties:userProperties:userPropertiesSetOnce:groups:timestamp:) public func capture(_ event: Swift.String, distinctId: Swift.String? = nil, properties: [Swift.String : Any]? = nil, userProperties: [Swift.String : Any]? = nil, userPropertiesSetOnce: [Swift.String : Any]? = nil, groups: [Swift.String : Swift.String]? = nil, timestamp: Foundation.Date? = nil)
+  @objc(captureLogWithBody:) public func captureLog(_ body: Swift.String)
+  @objc(captureLogWithBody:level:) public func captureLog(_ body: Swift.String, level: PostHog.PostHogLogSeverity)
+  @objc(captureLogWithBody:level:attributes:) public func captureLog(_ body: Swift.String, level: PostHog.PostHogLogSeverity, attributes: [Swift.String : Any]?)
+  @objc(captureLogWithBody:level:attributes:traceId:spanId:traceFlags:) public func captureLog(_ body: Swift.String, level: PostHog.PostHogLogSeverity, attributes: [Swift.String : Any]?, traceId: Swift.String?, spanId: Swift.String?, traceFlags: Foundation.NSNumber?)
+  public func captureLog(_ body: Swift.String, level: PostHog.PostHogLogSeverity = .info, attributes: [Swift.String : Any]? = nil, traceId: Swift.String? = nil, spanId: Swift.String? = nil, traceFlags: Swift.Int? = nil)
+  @objc public func screen(_ screenTitle: Swift.String)
+  @objc(screenWithTitle:properties:) public func screen(_ screenTitle: Swift.String, properties: [Swift.String : Any]? = nil)
+  @objc public func alias(_ alias: Swift.String)
+  @objc(groupWithType:key:) public func group(type: Swift.String, key: Swift.String)
+  @objc(groupWithType:key:groupProperties:) public func group(type: Swift.String, key: Swift.String, groupProperties: [Swift.String : Any]? = nil)
+  @objc public func setPersonPropertiesForFlags(_ properties: [Swift.String : Any])
+  @objc(setPersonPropertiesForFlagsWithProperties:reloadFeatureFlags:) public func setPersonPropertiesForFlags(_ properties: [Swift.String : Any], reloadFeatureFlags: Swift.Bool = true)
+  @objc public func resetPersonPropertiesForFlags()
+  @objc(resetPersonPropertiesForFlagsWithReloadFeatureFlags:) public func resetPersonPropertiesForFlags(reloadFeatureFlags: Swift.Bool = true)
+  @objc(setGroupPropertiesForFlags:properties:) public func setGroupPropertiesForFlags(_ groupType: Swift.String, properties: [Swift.String : Any])
+  @objc(setGroupPropertiesForFlags:properties:reloadFeatureFlags:) public func setGroupPropertiesForFlags(_ groupType: Swift.String, properties: [Swift.String : Any], reloadFeatureFlags: Swift.Bool = true)
+  @objc public func resetGroupPropertiesForFlags()
+  @objc(resetGroupPropertiesForFlagsWithReloadFeatureFlags:) public func resetGroupPropertiesForFlags(reloadFeatureFlags: Swift.Bool = true)
+  @objc(resetGroupPropertiesForFlagsWithGroupType:) public func resetGroupPropertiesForFlags(_ groupType: Swift.String)
+  @objc(resetGroupPropertiesForFlagsWithGroupType:reloadFeatureFlags:) public func resetGroupPropertiesForFlags(_ groupType: Swift.String, reloadFeatureFlags: Swift.Bool = true)
+  @objc public func reloadFeatureFlags()
+  @objc(reloadFeatureFlagsWithCallback:) public func reloadFeatureFlags(_ callback: @escaping () -> Swift.Void)
+  @objc public func captureFeatureView(flag: Swift.String, flagVariant: Swift.String?)
+  @objc public func captureFeatureInteraction(flag: Swift.String, flagVariant: Swift.String?)
+  @objc public func getFeatureFlagResult(_ key: Swift.String) -> PostHog.PostHogFeatureFlagResult?
+  @objc(getFeatureFlagResultWithKey:sendFeatureFlagEvent:) public func getFeatureFlagResult(_ key: Swift.String, sendFeatureFlagEvent: Swift.Bool) -> PostHog.PostHogFeatureFlagResult?
+  @objc public func getFeatureFlag(_ key: Swift.String) -> Any?
+  @objc(getFeatureFlagWithKey:sendFeatureFlagEvent:) public func getFeatureFlag(_ key: Swift.String, sendFeatureFlagEvent: Swift.Bool) -> Any?
+  @objc public func isFeatureEnabled(_ key: Swift.String) -> Swift.Bool
+  @objc(isFeatureEnabledWithKey:sendFeatureFlagEvent:) public func isFeatureEnabled(_ key: Swift.String, sendFeatureFlagEvent: Swift.Bool) -> Swift.Bool
+  @objc public func getAllFeatureFlags() -> [PostHog.PostHogFeatureFlagResult]?
+  @available(*, deprecated, message: "Use getFeatureFlagResult(_:) instead which properly tracks feature flag usage")
+  @objc public func getFeatureFlagPayload(_ key: Swift.String) -> Any?
+  @objc public func optIn()
+  @objc public func optOut()
+  @objc public func isOptOut() -> Swift.Bool
+  @objc public func close()
+  @objc(startSessionRecording) public func startSessionRecording()
+  @objc(startSessionRecordingWithResumeCurrent:) public func startSessionRecording(resumeCurrent: Swift.Bool)
+  @objc public func stopSessionRecording()
+  @objc public static func with(_ config: PostHog.PostHogConfig) -> PostHog.PostHogSDK
+  @objc public func isSessionReplayActive() -> Swift.Bool
+  @objc public func isAutocaptureActive() -> Swift.Bool
+  @objc public func isRageClickActive() -> Swift.Bool
+  @objc(captureExceptionWithError:properties:) public func captureException(_ error: any Swift.Error, properties: [Swift.String : Any]? = nil)
+  @objc(captureExceptionWithError:) public func captureException(_ error: any Swift.Error)
+  @objc(captureExceptionWithNSException:properties:) public func captureException(_ exception: Foundation.NSException, properties: [Swift.String : Any]? = nil)
+  @objc(captureExceptionWithNSException:) public func captureException(_ exception: Foundation.NSException)
+  @objc(addExceptionStep:properties:) public func addExceptionStep(_ message: Swift.String, properties: [Swift.String : Any]? = nil)
+  @objc(addExceptionStep:) public func addExceptionStep(_ message: Swift.String)
+}
+public typealias BeforeSendBlock = (PostHog.PostHogEvent) -> PostHog.PostHogEvent?
+@objc(PostHogConfig) public class PostHogConfig : ObjectiveC.NSObject {
+  @objc(PostHogDataMode) public enum PostHogDataMode : Swift.Int {
+    case wifi
+    case cellular
+    case any
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @objc final public let host: Foundation.URL
+  @objc final public let projectToken: Swift.String
+  @available(*, deprecated, message: "Use projectToken instead. This will be removed in the next major version.")
+  @objc public var apiKey: Swift.String {
+    @objc get
+  }
+  @objc public var flushAt: Swift.Int
+  @objc public var maxQueueSize: Swift.Int
+  @objc public var maxBatchSize: Swift.Int
+  @objc public var flushIntervalSeconds: Foundation.TimeInterval
+  @objc public var maxRetries: Swift.Int
+  @objc public var featureFlagRequestMaxRetries: Swift.Int
+  @objc public var dataMode: PostHog.PostHogConfig.PostHogDataMode
+  @objc public var sendFeatureFlagEvent: Swift.Bool
+  @objc public var preloadFeatureFlags: Swift.Bool
+  @available(*, deprecated, message: "Remote config is now always loaded. This option is a no-op and will be removed in a future version.")
+  @objc public var remoteConfig: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var captureApplicationLifecycleEvents: Swift.Bool
+  @objc public var captureScreenViews: Swift.Bool
+  @objc public var enableSwizzling: Swift.Bool
+  @objc public var captureElementInteractions: Swift.Bool
+  @objc final public let rageClickConfig: PostHog.PostHogRageClickConfig
+  @objc public var debug: Swift.Bool
+  @objc public var optOut: Swift.Bool
+  @objc public var getAnonymousId: (_ uuid: Foundation.UUID) -> Foundation.UUID
+  @objc public var reuseAnonymousId: Swift.Bool
+  @available(*, deprecated, message: "Use beforeSend instead")
+  @objc public var propertiesSanitizer: (any PostHog.PostHogPropertiesSanitizer)? {
+    @objc get
+    @objc set
+  }
+  @objc public var personProfiles: PostHog.PostHogPersonProfiles
+  @objc public var setDefaultPersonProperties: Swift.Bool
+  @objc public var evaluationContexts: [Swift.String]?
+  @available(*, deprecated, message: "Use evaluationContexts instead. This property will continue to work but will be removed in a future version.")
+  @objc public var evaluationEnvironments: [Swift.String]? {
+    @objc get
+    @objc set
+  }
+  @objc public var appGroupIdentifier: Swift.String?
+  @objc public var snapshotEndpoint: Swift.String
+  public static let defaultHost: Swift.String
+  @objc public var tracingHeaders: [Swift.String]?
+  @objc public var sessionReplay: Swift.Bool
+  @objc final public let sessionReplayConfig: PostHog.PostHogSessionReplayConfig
+  @objc final public let errorTrackingConfig: PostHog.PostHogErrorTrackingConfig
+  @objc final public let logs: PostHog.PostHogLogsConfig
+  @available(iOS 15.0, *)
+  @available(watchOS, unavailable, message: "Surveys are only available on iOS 15+")
+  @available(macOS, unavailable, message: "Surveys are only available on iOS 15+")
+  @available(tvOS, unavailable, message: "Surveys are only available on iOS 15+")
+  @available(visionOS, unavailable, message: "Surveys are only available on iOS 15+")
+  @objc public var surveys: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @available(iOS 15.0, *)
+  @available(watchOS, unavailable, message: "Surveys are only available on iOS 15+")
+  @available(macOS, unavailable, message: "Surveys are only available on iOS 15+")
+  @available(tvOS, unavailable, message: "Surveys are only available on iOS 15+")
+  @available(visionOS, unavailable, message: "Surveys are only available on iOS 15+")
+  @objc public var surveysConfig: PostHog.PostHogSurveysConfig {
+    @objc get
+    @objc set
+  }
+  @objc public var urlSessionConfiguration: Foundation.URLSessionConfiguration?
+  @objc public var requestHeaders: [Swift.String : Swift.String]?
+  public var storageManager: PostHog.PostHogStorageManager?
+  @objc(projectToken:) public init(projectToken: Swift.String)
+  @objc(projectToken:host:) public init(projectToken: Swift.String, host: Swift.String = defaultHost)
+  @available(*, deprecated, message: "Use init(projectToken:) instead. This will be removed in the next major version.")
+  @objc(apiKey:) convenience public init(apiKey: Swift.String)
+  @available(*, deprecated, message: "Use init(projectToken:host:) instead. This will be removed in the next major version.")
+  @objc(apiKey:host:) convenience public init(apiKey: Swift.String, host: Swift.String = defaultHost)
+  public func setBeforeSend(_ blocks: [PostHog.BeforeSendBlock])
+  public func setBeforeSend(_ blocks: PostHog.BeforeSendBlock...)
+  @available(swift, obsoleted: 1.0, message: "Use setBeforeSend(_ blocks: BeforeSendBlock...) instead")
+  @objc public func setBeforeSend(_ blocks: [PostHog.BoxedBeforeSendBlock])
+  @objc deinit
+}
+
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func postHogMask(_ isEnabled: Swift.Bool = true) -> some SwiftUICore.View
+  
+}
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func postHogLabel(_ label: Swift.String?) -> some SwiftUICore.View
+  
+}
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func postHogNoRageClick(_ isEnabled: Swift.Bool = true) -> some SwiftUICore.View
+  
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public var postHogLabel: Swift.String? {
+    get
+    set
+  }
+}
+public func sanitizeDictionary(_ dict: [Swift.String : Any]?) -> [Swift.String : Any]?
+@_hasMissingDesignatedInitializers @objc(PostHogEvent) public class PostHogEvent : ObjectiveC.NSObject {
+  @objc public var event: Swift.String
+  @objc public var distinctId: Swift.String
+  @objc public var properties: [Swift.String : Any]
+  @objc public var timestamp: Foundation.Date
+  @objc public var uuid: Foundation.UUID {
+    get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(PostHogFeatureFlagResult) public class PostHogFeatureFlagResult : ObjectiveC.NSObject {
+  @objc final public let key: Swift.String
+  @objc final public let enabled: Swift.Bool
+  @objc final public let variant: Swift.String?
+  @objc final public let payload: Any?
+  public func payloadAs<T>(_ type: T.Type) -> T? where T : Swift.Decodable
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc(PostHogSessionReplayConfig) public class PostHogSessionReplayConfig : ObjectiveC.NSObject {
+  @objc public var maskAllTextInputs: Swift.Bool
+  @objc public var maskAllImages: Swift.Bool
+  @objc public var maskAllSandboxedViews: Swift.Bool
+  @available(*, deprecated, message: "This property has no effect and will be removed in the next major release. To learn how to manually mask user photos please see our Privacy controls documentation: https://posthog.com/docs/session-replay/privacy?tab=iOS")
+  @objc public var maskPhotoLibraryImages: Swift.Bool
+  @objc public var captureNetworkTelemetry: Swift.Bool
+  @objc public var screenshotMode: Swift.Bool
+  @objc public var screenshotModeBackgroundCapture: Swift.Bool
+  @available(*, deprecated, message: "Deprecated in favor of 'throttleDelay' which provides identical functionality. Will be removed in the next major release.")
+  @objc public var debouncerDelay: Foundation.TimeInterval {
+    @objc get
+    @objc set
+  }
+  @objc public var throttleDelay: Swift.Double
+  @objc public var captureLogs: Swift.Bool
+  @objc public var captureLogsConfig: PostHog.PostHogSessionReplayConsoleLogConfig
+  @objc public var sampleRate: Foundation.NSNumber? {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc(PostHogPersonProfiles) public enum PostHogPersonProfiles : Swift.Int {
+  case never
+  case always
+  case identifiedOnly
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers @objc public class PostHogDisplaySurveyQuestion : ObjectiveC.NSObject {
+  @objc final public let id: Swift.String
+  @objc final public let question: Swift.String
+  @objc final public let questionDescription: Swift.String?
+  @objc final public let questionDescriptionContentType: PostHog.PostHogDisplaySurveyTextContentType
+  @objc final public let isOptional: Swift.Bool
+  @objc final public let buttonText: Swift.String?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class PostHogDisplayOpenQuestion : PostHog.PostHogDisplaySurveyQuestion {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class PostHogDisplayLinkQuestion : PostHog.PostHogDisplaySurveyQuestion {
+  final public let link: Swift.String?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class PostHogDisplayRatingQuestion : PostHog.PostHogDisplaySurveyQuestion {
+  final public let ratingType: PostHog.PostHogDisplaySurveyRatingType
+  final public let scaleLowerBound: Swift.Int
+  final public let scaleUpperBound: Swift.Int
+  final public let lowerBoundLabel: Swift.String
+  final public let upperBoundLabel: Swift.String
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class PostHogDisplayChoiceQuestion : PostHog.PostHogDisplaySurveyQuestion {
+  final public let choices: [Swift.String]
+  final public let hasOpenChoice: Swift.Bool
+  final public let shuffleOptions: Swift.Bool
+  final public let isMultipleChoice: Swift.Bool
+  @objc deinit
+}
+public func imageToBase64(_ image: UIKit.UIImage, _ compressionQuality: CoreFoundation.CGFloat = 0.3) -> Swift.String?
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func postHogNoMask() -> some SwiftUICore.View
+  
+}
+public enum ReachabilityError : Swift.Error {
+  case failedToCreateWithAddress(Darwin.sockaddr, Swift.Int32)
+  case failedToCreateWithHostname(Swift.String, Swift.Int32)
+  case unableToSetCallback(Swift.Int32)
+  case unableToSetDispatchQueue(Swift.Int32)
+  case unableToGetFlags(Swift.Int32)
+}
+@available(*, unavailable, renamed: "Notification.Name.reachabilityChanged")
+public let ReachabilityChangedNotification: Foundation.NSNotification.Name
+@_hasMissingDesignatedInitializers @objc final public class PostHogLogRecord : ObjectiveC.NSObject {
+  @objc final public var body: Swift.String
+  @objc final public var level: PostHog.PostHogLogSeverity
+  @objc final public var attributes: [Swift.String : Any]
+  @objc final public var traceId: Swift.String?
+  @objc final public var spanId: Swift.String?
+  @objc final public var traceFlags: Foundation.NSNumber?
+  @objc final public var distinctId: Swift.String?
+  @objc final public var sessionId: Swift.String?
+  @objc final public var screenName: Swift.String?
+  @objc final public var featureFlagKeys: [Swift.String]
+  @objc deinit
+}
+@objc public enum PostHogLogSeverity : Swift.Int, Swift.CaseIterable {
+  case trace
+  case debug
+  case info
+  case warn
+  case error
+  case fatal
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [PostHog.PostHogLogSeverity]
+  public typealias RawValue = Swift.Int
+  nonisolated public static var allCases: [PostHog.PostHogLogSeverity] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public typealias PostHogBeforeSendLogBlock = (PostHog.PostHogLogRecord) -> PostHog.PostHogLogRecord?
+@_inheritsConvenienceInitializers @objc final public class PostHogLogsConfig : ObjectiveC.NSObject {
+  @objc final public var flushIntervalSeconds: Foundation.TimeInterval
+  @objc final public var maxBufferSize: Swift.Int
+  @objc final public var flushAt: Swift.Int
+  @objc final public var maxBatchSize: Swift.Int
+  @objc final public var serviceName: Swift.String
+  @objc final public var serviceVersion: Swift.String
+  @objc final public var environment: Swift.String?
+  @objc final public var resourceAttributes: [Swift.String : Any]
+  @objc final public var rateCapMaxLogs: Swift.Int
+  @objc final public var rateCapWindowSeconds: Foundation.TimeInterval
+  final public func setBeforeSend(_ blocks: [PostHog.PostHogBeforeSendLogBlock])
+  final public func setBeforeSend(_ blocks: PostHog.PostHogBeforeSendLogBlock...)
+  @available(swift, obsoleted: 1.0, message: "Use setBeforeSend(_ blocks: PostHogBeforeSendLogBlock...) instead")
+  @objc final public func setBeforeSend(_ blocks: [PostHog.BoxedBeforeSendLogBlock])
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc final public class PostHogLogger : ObjectiveC.NSObject {
+  @objc(traceWithBody:) final public func trace(_ body: Swift.String)
+  @objc(traceWithBody:attributes:) final public func trace(_ body: Swift.String, attributes: [Swift.String : Any]? = nil)
+  @objc(debugWithBody:) final public func debug(_ body: Swift.String)
+  @objc(debugWithBody:attributes:) final public func debug(_ body: Swift.String, attributes: [Swift.String : Any]? = nil)
+  @objc(infoWithBody:) final public func info(_ body: Swift.String)
+  @objc(infoWithBody:attributes:) final public func info(_ body: Swift.String, attributes: [Swift.String : Any]? = nil)
+  @objc(warnWithBody:) final public func warn(_ body: Swift.String)
+  @objc(warnWithBody:attributes:) final public func warn(_ body: Swift.String, attributes: [Swift.String : Any]? = nil)
+  @objc(errorWithBody:) final public func error(_ body: Swift.String)
+  @objc(errorWithBody:attributes:) final public func error(_ body: Swift.String, attributes: [Swift.String : Any]? = nil)
+  @objc(fatalWithBody:) final public func fatal(_ body: Swift.String)
+  @objc(fatalWithBody:attributes:) final public func fatal(_ body: Swift.String, attributes: [Swift.String : Any]? = nil)
+  @objc deinit
+}
+extension PostHog.PostHogSurveyResponseType : Swift.Equatable {}
+extension PostHog.PostHogSurveyResponseType : Swift.Hashable {}
+extension PostHog.PostHogSurveyResponseType : Swift.RawRepresentable {}
+extension PostHog.PostHogDisplaySurveyRatingType : Swift.Equatable {}
+extension PostHog.PostHogDisplaySurveyRatingType : Swift.Hashable {}
+extension PostHog.PostHogDisplaySurveyRatingType : Swift.RawRepresentable {}
+extension PostHog.PostHogDisplaySurveyTextContentType : Swift.Equatable {}
+extension PostHog.PostHogDisplaySurveyTextContentType : Swift.Hashable {}
+extension PostHog.PostHogDisplaySurveyTextContentType : Swift.RawRepresentable {}
+extension PostHog.PostHogLogLevel : Swift.Equatable {}
+extension PostHog.PostHogLogLevel : Swift.Hashable {}
+extension PostHog.PostHogLogLevel : Swift.RawRepresentable {}
+extension PostHog.PostHogConfig.PostHogDataMode : Swift.Equatable {}
+extension PostHog.PostHogConfig.PostHogDataMode : Swift.Hashable {}
+extension PostHog.PostHogConfig.PostHogDataMode : Swift.RawRepresentable {}
+extension PostHog.PostHogPersonProfiles : Swift.Equatable {}
+extension PostHog.PostHogPersonProfiles : Swift.Hashable {}
+extension PostHog.PostHogPersonProfiles : Swift.RawRepresentable {}
+extension PostHog.PostHogLogSeverity : Swift.Equatable {}
+extension PostHog.PostHogLogSeverity : Swift.Hashable {}
+extension PostHog.PostHogLogSeverity : Swift.RawRepresentable {}
