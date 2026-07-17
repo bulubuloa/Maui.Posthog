@@ -1,4 +1,4 @@
-namespace Maui.Posthog;
+﻿namespace Maui.Posthog;
 
 /// <summary>Startup configuration for the PostHog SDK.</summary>
 public sealed class PostHogOptions
@@ -28,10 +28,36 @@ public sealed class PostHogOptions
     public int FlushAt { get; set; } = 20;
 
     /// <summary>Session replay masking / privacy settings.</summary>
-    public SessionReplayOptions Replay { get; set; } = new();
+    public SessionReplayOptions Replay { get; set; } = new SessionReplayOptions();
+
+    /// <summary>
+    /// Build and validate an options instance from a configuration callback.
+    /// </summary>
+    /// <param name="configure">Callback that mutates the options.</param>
+    /// <returns>The configured, validated options.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="configure"/> is null.</exception>
+    /// <exception cref="ArgumentException">
+    /// <see cref="ApiKey"/> is null or whitespace after configuration.
+    /// </exception>
+    internal static PostHogOptions Create(Action<PostHogOptions> configure)
+    {
+        ArgumentNullException.ThrowIfNull(configure);
+
+        var options = new PostHogOptions();
+        configure(options);
+
+        if (string.IsNullOrWhiteSpace(options.ApiKey))
+        {
+            throw new ArgumentException("PostHogOptions.ApiKey must be set.", nameof(configure));
+        }
+
+        return options;
+    }
 }
 
-/// <summary>Session replay privacy controls (only used when <see cref="PostHogOptions.SessionReplay"/> is true).</summary>
+/// <summary>
+/// Session replay privacy controls (only used when <see cref="PostHogOptions.SessionReplay"/> is true).
+/// </summary>
 public sealed class SessionReplayOptions
 {
     /// <summary>Mask all text input fields. Default true.</summary>
@@ -40,6 +66,8 @@ public sealed class SessionReplayOptions
     /// <summary>Mask all images. Default true.</summary>
     public bool MaskAllImages { get; set; } = true;
 
-    /// <summary>Capture the screen as periodic screenshots (recommended for non-native UI). Default true.</summary>
+    /// <summary>
+    /// Capture the screen as periodic screenshots (recommended for non-native UI). Default true.
+    /// </summary>
     public bool ScreenshotMode { get; set; } = true;
 }

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageReference Include="Omnicasa.Analyzers" Version="2026.5.29.18">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <!--
+    The shipping Maui.Posthog assembly targets net10.0-ios/-android only, so it cannot be
+    referenced from a plain net10.0 test project. Link the platform-agnostic contracts instead.
+  -->
+  <ItemGroup>
+    <Compile Include="..\..\src\Maui.Posthog\PostHogOptions.cs" Link="Contracts\PostHogOptions.cs" />
+    <Compile Include="..\..\src\Maui.Posthog\IPostHog.cs" Link="Contracts\IPostHog.cs" />
+  </ItemGroup>
+
+</Project>

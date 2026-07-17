@@ -1,4 +1,4 @@
-namespace Maui.Posthog;
+﻿namespace Maui.Posthog;
 
 /// <summary>Cross-platform PostHog analytics surface. Resolve from DI after <c>AddPostHog</c>.</summary>
 public interface IPostHog
@@ -7,7 +7,10 @@ public interface IPostHog
     void Capture(string eventName, IDictionary<string, object>? properties = null);
 
     /// <summary>Associate the current user with a distinct id and optional person properties.</summary>
-    void Identify(string distinctId, IDictionary<string, object>? userProperties = null, IDictionary<string, object>? userPropertiesSetOnce = null);
+    void Identify(
+        string distinctId,
+        IDictionary<string, object>? userProperties = null,
+        IDictionary<string, object>? userPropertiesSetOnce = null);
 
     /// <summary>Capture a screen view.</summary>
     void Screen(string screenName, IDictionary<string, object>? properties = null);

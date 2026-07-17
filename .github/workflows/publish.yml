@@ -37,6 +37,9 @@ jobs:
         run: dotnet workload restore Maui.Posthog.slnx
 
       # yyyy.MM.dd.<run_number> — run_number is monotonic, so the version always increases.
+      - name: Test
+        run: dotnet test test/Omnicasa.Maui.PostHog.Test/Omnicasa.Maui.PostHog.Test.csproj -c Release
+
       - name: Compute version
         id: ver
         run: echo "version=$(date -u +'%Y.%m.%d').${{ github.run_number }}" >> "$GITHUB_OUTPUT"

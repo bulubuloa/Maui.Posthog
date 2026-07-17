@@ -7,4 +7,7 @@
     <Project Path="src/Maui.Posthog.iOS/Maui.Posthog.iOS.csproj" />
     <Project Path="src/Maui.Posthog/Maui.Posthog.csproj" />
   </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Omnicasa.Maui.PostHog.Test/Omnicasa.Maui.PostHog.Test.csproj" />
+  </Folder>
 </Solution>
