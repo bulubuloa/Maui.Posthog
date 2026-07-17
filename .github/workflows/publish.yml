@@ -1,0 +1,63 @@
+name: Publish NuGet
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    # macOS is required: the iOS binding builds against PostHog.xcframework via Xcode.
+    runs-on: macos-15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # JDK 17+ is required by the Android manifest merger (class file version 61).
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: microsoft
+          java-version: '17'
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore MAUI workloads
+        run: dotnet workload restore Maui.Posthog.slnx
+
+      # yyyy.MM.dd.<run_number> — run_number is monotonic, so the version always increases.
+      - name: Compute version
+        id: ver
+        run: echo "version=$(date -u +'%Y.%m.%d').${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+
+      - name: Pack
+        run: |
+          for proj in \
+            src/Maui.Posthog.Android/Maui.Posthog.Android.csproj \
+            src/Maui.Posthog.iOS/Maui.Posthog.iOS.csproj \
+            src/Maui.Posthog/Maui.Posthog.csproj
+          do
+            dotnet pack "$proj" -c Release \
+              -p:ContinuousIntegrationBuild=true \
+              -p:Version="${{ steps.ver.outputs.version }}"
+          done
+
+      - name: Push to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet nuget push "artifacts/nuget/*.nupkg" \
+            --source https://api.nuget.org/v3/index.json \
+            --api-key "$NUGET_API_KEY" \
+            --skip-duplicate
