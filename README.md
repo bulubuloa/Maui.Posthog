@@ -1,5 +1,9 @@
 # Maui.Posthog
 
+[![NuGet](https://img.shields.io/nuget/v/Omnicasa.Maui.PostHog.svg)](https://www.nuget.org/packages/Omnicasa.Maui.PostHog)
+[![Downloads](https://img.shields.io/nuget/dt/Omnicasa.Maui.PostHog.svg)](https://www.nuget.org/packages/Omnicasa.Maui.PostHog)
+[![Publish NuGet](https://github.com/bulubuloa/Maui.Posthog/actions/workflows/publish.yml/badge.svg)](https://github.com/bulubuloa/Maui.Posthog/actions/workflows/publish.yml)
+
 .NET MAUI bindings for the native PostHog SDKs, with a single cross-platform façade.
 
 | Platform | Native SDK | Version |

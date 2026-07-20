@@ -7,8 +7,8 @@
     <Company>Omnicasa</Company>
     <Product>Maui.Posthog</Product>
     <Copyright>Copyright © Omnicasa</Copyright>
-    <PackageProjectUrl>https://github.com/omnicasa/Maui.Posthog</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/omnicasa/Maui.Posthog</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/bulubuloa/Maui.Posthog</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/bulubuloa/Maui.Posthog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>maui;posthog;analytics;session-replay;feature-flags;ios;android</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
