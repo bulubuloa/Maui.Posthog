@@ -35,5 +35,12 @@ xcrun xcodebuild -create-xcframework \
   -framework "$SIM" \
   -output "$OUT/PostHog.xcframework"
 
+# posthog-ios vendors PLCrashReporter, whose repo files land in the framework root.
+# Apple rejects executable scripts inside embedded frameworks: codesign treats them as
+# nested code, leaves them out of the resource seal, and App Store validation then fails
+# with ITMS-90035 "Code object is not signed at all".
+echo ">>> Stripping non-signable scripts ..."
+find "$OUT/PostHog.xcframework" -type f -name '*.sh' -print -delete
+
 echo ">>> DONE: $OUT/PostHog.xcframework"
 ls -la "$OUT/PostHog.xcframework"
